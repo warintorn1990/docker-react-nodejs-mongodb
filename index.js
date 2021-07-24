@@ -5,8 +5,17 @@ console.log(url);
 
 var app = express();
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 app.get("/api/products", (req, res) => {
   MongoClient.connect(url, (err, client) => {
+
+
     if (err) throw err;
     console.log("Database connected!");
 
