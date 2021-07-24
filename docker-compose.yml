@@ -1,0 +1,39 @@
+version: "3"
+services: 
+    mymongodb:
+        build: 
+            dockerfile: Dockerfile
+            context: ./mongodb
+        restart: always
+        networks: 
+            - users
+    mynodejsapp:
+        depends_on: 
+            - mymongodb
+        build: 
+            dockerfile: Dockerfile
+            context: ./nodejs
+        networks: 
+            - users
+        ports: 
+            - 8000:8000
+        restart: always
+        environment: 
+            DATABASE_USER: admin
+            DATABASE_PASSWORD: 1111
+            DATABASE_HOST: mymongodb
+    myreactapp:
+        depends_on: 
+            - mymongodb
+            - mynodejsapp
+        build: 
+            dockerfile: Dockerfile.prod
+            context: ./frontend
+        ports: 
+            - 3000:80
+        networks: 
+            - users
+        restart: always
+
+networks:
+    users:

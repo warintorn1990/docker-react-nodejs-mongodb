@@ -9,8 +9,9 @@ class App extends Component {
       products : ""
     }
   }
+  
   componentDidMount(){
-    axios.get("http://localhost:3001/api/products").then((r) => {
+    axios.get("http://localhost:8000/api/products").then((r) => {
       this.setState({products: r.data});
     });
   }

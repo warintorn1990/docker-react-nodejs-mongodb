@@ -5,4 +5,4 @@ ENV MONGO_INITDB_ROOT_PASSWORD 1111
 ENV MONGO_INITDB_DATABASE users
 
 
-ADD ./data/users.js ./docker-entrypoint-initdb.d
+ADD ./data/users.js ./docker-entrypoint-initdb.d 
